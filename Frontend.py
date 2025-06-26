@@ -442,7 +442,14 @@ with st.container():
         database = st.text_input("Database Name")
         
         if st.button("Connect to MySQL"):
+            bk.load_sales_df_from_mysql(host, port, user, password, database)
             st.success(f"✅ Connected to {database} at {host}:{port}")
+
+        df = bk.get_loaded_df()
+        if df is not None:
+            st.markdown("### 📄 Preview of Loaded Data:")
+            st.dataframe(df.head(10), use_container_width=True)
+
 
     elif st.session_state.data_source == "csv":
         if st.button("Generate Sample Data"):
@@ -450,12 +457,22 @@ with st.container():
             bk.load_sales_df_from_csv()
             st.success("✅ Sample data 'sales_dataset.csv' created!")
 
+        df = bk.get_loaded_df()
+        if df is not None:
+            st.markdown("### 📄 Preview of Sample Data:")
+            st.dataframe(df.head(10), use_container_width=True)
+
     elif st.session_state.data_source == "excel":
         uploaded_file = st.file_uploader("📤 Upload your Excel file Here", type=["xlsx", "xls"])
         
         if uploaded_file:
             bk.load_sales_df_from_excel(uploaded_file)
             st.success("✅ Excel file successfully uploaded and loaded!")
+
+        df = bk.get_loaded_df()
+        if df is not None:
+            st.markdown("### 📄 Preview of Uploaded Data:")
+            st.dataframe(df.head(10), use_container_width=True)
 
 
     # Input and button

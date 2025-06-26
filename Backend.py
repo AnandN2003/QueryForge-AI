@@ -118,5 +118,11 @@ def run_pandas_code(pandas_code):
     except Exception as e:
         print(f"⚠️ Error running pandas code: {e}")
         return None
+    
+# Return the currently loaded DataFrame
+def get_loaded_df():
+    global sales_df
+    return sales_df
+
 
 
