@@ -6,3 +6,7 @@ python-dotenv
 cohere
 pandasql
 openpyxl
+mysql-connector-python
+scikit-learn
+matplotlib
+seaborn
